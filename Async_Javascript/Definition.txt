@@ -1,0 +1,68 @@
+Whenever we use the alert function in the javascript the pop up always shown in the
+browser and until we click on the "OK" button showing in the dialog box it it remains visible
+means it blocks the remaining lines of code from the execution.
+It will that line of code will always remain in the callstack until we click on the 
+OK button showing on the popup window  
+
+Example given below of syncronous code:
+
+const p = document.queryselector('.p')
+p.textContent = 'My name is Neeraj'
+alert('Text set!')
+p.style.color= 'red'
+
+
+// Example of asyncronus code : Timer with callback
+const p = document.queryselector('.p')
+setTimeout(function (){
+
+    p.textContent = 'My nameis Neeraj'
+
+}, 5000)
+p.style.color = 'red';
+
+//  ****************Keypoint *****************************
+
+Callback function alone do not make code asyncronus, or doesn't make automatically make the code 
+asyncronus : ex :  [1,2,3].map(v=> v*2)
+
+// Like callback function addEventListener does not make the code asyncronus for example :
+// an EventListener listening on a click on a button is not doing any work in the 
+// background ... it's simply waiting a click to happen but not actually doing anything in the background
+
+To better understand this lets take another example :
+
+
+const img = document.querySelector('.dog')
+img.src = 'dog.jpg' // this line of code is asyncronus because we setting resource attribute of any image
+// essentially loading an image in the background while rest of the code is keep running.. it happens
+// because might possible image is heavy so it will take time so it's better if it runs in the background
+// without block the main thread , that's why setting resource attribute in javascript 
+// has done in asyncronus way ... and once the image loaded the load event automatically emit by the 
+// javascript which we can listen in the next line of code 
+
+img.addEventListener('load', function(){
+
+    img.classList.add('fadeIn');
+})
+
+p.style.width = '300px';
+
+
+// ****************************API ********************************
+
+its a peice of software that can be used by another peice of software in order to
+allow applications to talk to each other 
+
+Ex : DOM api , console API
+
+When we make ajax calls we make diffrent types of API calls we called them Online APIs ( kind of application running on webserver) APIs 
+we request data from the server from browser api fetch the data from the database on the server
+and return it to the browser.
+
+// We can build our own web APIs( requires backend devlopement eg: NODE JS) our USE third party API's 
+
+// There is APIs for almost everything : weather data, data about countries, flights data, currency
+// conversion data , Google Maps etc 
+
+
