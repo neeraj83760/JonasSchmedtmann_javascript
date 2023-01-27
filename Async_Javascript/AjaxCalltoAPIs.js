@@ -17,13 +17,16 @@ request.open('GET', 'https://restcountries.com/v3.1/name/india')
 
 request.send(); // the send method emits the load event when we have the data from the server 
 
-console.table(request.responseText) // this sometimes reponseText will not set the property because of 
+//console.table(request.responseText) // this sometimes reponseText will not set the property because of 
 // asynronus behaviour  
 
 request.addEventListener('load', function(){
 
-    console.table(this.responseText); // response is in the property called responseText when can 
+    // console.table(this.responseText); // response is in the property called responseText when can 
     // set the values once we actually receive the data 
+
+    const data = JSON.parse(this.responseText);
+    console.table(data);  
 
 })
 
