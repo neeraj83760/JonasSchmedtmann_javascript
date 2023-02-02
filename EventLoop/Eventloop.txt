@@ -1,0 +1,9 @@
+Microtaskqueue : all the callbacks in the Microtaskqueue will always be executed first
+even if there are already lots of callbacks in the callbackqueue which sometimes leads to
+starvation to callback queue 
+
+Priority of Microtaskqueue >>>> callbackqueue 
+
+VVVIMP Keypoint :  timers in javascript not always promise that they will execute just after the 
+seconds u have mentioned in the settimout function , if u set it for 5 seconds it will not execute
+before 5 seonds but may take longer .... why ?  Interting question 
