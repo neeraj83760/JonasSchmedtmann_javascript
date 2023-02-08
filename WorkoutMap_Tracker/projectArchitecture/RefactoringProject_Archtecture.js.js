@@ -19,6 +19,71 @@ const inputElevation = document.querySelector('.form__input--elevation');
 // most of these methods we want this keyword to still point the Object itself ..in our case it's "App" object
 // which is this keyword which we pass inside the bind function 
 
+
+class Workout{
+
+    date = new Date();
+    // Below line of code is just a workaround to the unique ID  
+    id  = (new Date.now() + '' ).slice(-10);
+
+
+    // Its perfectly fine to call a method inside the constructor 
+    constructor(coords, distance, duration){
+
+        this.coords = coords; // [lat, lng] array of longitude and latitude 
+        this.distance= distance;  // in km
+        this.duration = duration; // in) min 
+    
+    }
+}
+
+
+class Running extends Workout{
+
+    constructor(coords, distance, duration, cadence){
+
+        super(coords, distance, duration);
+        this.cadence = cadence;
+        this.calPace();
+    }
+
+    calPace(){
+
+        // min/km
+        
+        this.pace = this.duration / this.distance;
+        return this.pace;
+    }
+}
+class Cycling extends Workout{
+
+    constructor(coords, distance, duration, elevationGain){
+
+        super(coords, distance, duration);
+        this.elevationGain = elevationGain; 
+        this.calSpeed();
+    }
+
+    calSpeed(){
+
+        // km/hr
+
+        this.speed = this.distance / (this.duration / 60);  
+        return this.speed;
+    }
+} 
+
+// The below run1 and cycling1 objects are just to check whether Cycling or Running classes are working
+// fine or not 
+
+// const run1 = new Running([39,-12], 5.4, 23, 183);
+// const cycling1  = new Cycling([39,-12], 25, 94, 433);
+
+// console.log(run1, cycling1); 
+
+
+///////////////// ********** APPLICATION ARCHITECHTURE ********************************
+
 class App {
 
     // We made map and mapEvent property private in the class 
