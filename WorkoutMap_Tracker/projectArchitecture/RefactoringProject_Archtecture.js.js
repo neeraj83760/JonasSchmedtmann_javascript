@@ -1,5 +1,10 @@
 // Giving a project a sturucture called Architecture
 
+// If there is no workouts initally when we load a map then where we should attach the 
+// Event handler to , coz we have not created any workouts yet .... so in this case
+// We need to do Event Delegation ... what we gonna do is that we add the event handler to the
+// parent element ... and the parent element is <ul class="workouts"> 
+
 'use strict';
 
 // prettier-ignore
@@ -23,6 +28,7 @@ class Workout {
   date = new Date();
   // Below line of code is just a workaround to the unique ID
   id = (Date.now() + '').slice(-10);
+  clicks = 0; 
 
   // Its perfectly fine to call a method inside the constructor
   constructor(coords, distance, duration) {
@@ -50,6 +56,11 @@ class Workout {
 
     this.description = `${this.type[0].toUpperCase()}${this.type.slice(1)} on ${months[this.date.getMonth()]}
     ${this.date.getDate()}`; 
+  }
+
+  click(){
+
+    this.clicks++; 
   }
 }
 
@@ -104,6 +115,7 @@ class App {
   // We made map and mapEvent property private in the class
   #map;
   #mapEvent;
+  #mapZoomLevel = 13;
   #workouts = [];
 
   constructor() {
@@ -113,6 +125,7 @@ class App {
 
     form.addEventListener('submit', this._newWorkout.bind(this));
     inputType.addEventListener('change', this._toggleElevationField);
+    containerWorkouts.addEventListener('click', this._moveToPopup.bind(this))
   }
 
   _getPosition() {
@@ -139,7 +152,7 @@ class App {
     //    second parameter is '13' which is zoom in value , like how much you would like to zoom it
 
     console.log(this);
-    this.#map = L.map('map').setView(coords, 13);
+    this.#map = L.map('map').setView(coords, this.#mapZoomLevel);
     // console.log(map); map is an inbulit function of L namespace
     // Leaflet gives us L namesapce here having tilelayer, addTO, etc as a methods
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -314,13 +327,34 @@ class App {
         <span class="workout__unit">m</span>
       </div>
     </li> 
-
-
-        `
+    `
 
         form.insertAdjacentHTML('afterend', html)
 
   }
+
+  _moveToPopup(e){
+
+    const workoutEl = e.target.closest('.workout');
+    console.log(workoutEl);
+    
+    if(!workoutEl) return;
+
+    const workout = this.#workouts.find(work => work.id === workoutEl.dataset.id);
+
+    console.log(workout);
+
+    this.#map.setView(workout.coords, this.#mapZoomLevel, {animate:true,
+    pan:{duration:1,}
+    })
+
+    //   using the public interface 
+    
+    workout.click();
+
+  } 
+
+
 }
 
 const app = new App();
