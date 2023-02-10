@@ -123,6 +123,10 @@ class App {
     //    the constructor immedieately
     this._getPosition();
 
+    // Get data from local storage 
+
+    this._getlocalStorage(); 
+
     form.addEventListener('submit', this._newWorkout.bind(this));
     inputType.addEventListener('change', this._toggleElevationField);
     containerWorkouts.addEventListener('click', this._moveToPopup.bind(this))
@@ -162,6 +166,11 @@ class App {
 
     // mapEvent is created by leaftlet library itself. Handling clickson Map
     this.#map.on('click', this._showForm.bind(this));
+
+    this.#workouts.forEach(work => {
+        // We can only render the markers once the page get loaded this shows async behaviour of the 
+        // the page  
+        this._renderWorkoutMarker(work); });
   }
 
   _showForm(mapE) {
@@ -257,6 +266,10 @@ class App {
 
     this._hideForm();
 
+    // set local storage to all workouts 
+
+    this._setlocalStorage();
+
     
   } // Display marker on the Map once user fill in the details on the left side of the
   // form have distance workout data
@@ -336,13 +349,13 @@ class App {
   _moveToPopup(e){
 
     const workoutEl = e.target.closest('.workout');
-    console.log(workoutEl);
+    // console.log(workoutEl);
     
     if(!workoutEl) return;
 
     const workout = this.#workouts.find(work => work.id === workoutEl.dataset.id);
 
-    console.log(workout);
+    // console.log(workout);
 
     this.#map.setView(workout.coords, this.#mapZoomLevel, {animate:true,
     pan:{duration:1,}
@@ -354,9 +367,42 @@ class App {
 
   } 
 
+  _setlocalStorage(){
+    // localstorage is blocking and a very simple API which browser provides us to store small amount of data in the browser
+    // we cant store large amount of data in it, if you do it will slow down your application 
+    localStorage.setItem('workouts', JSON.stringify(this.#workouts)) 
+  }
+
+  _getlocalStorage(){
+  
+  // json.parse is opposite of json.stringify   
+  const data = JSON.parse(localStorage.getItem('workouts'))
+  console.log(data)
+
+  if(!data) return;
+
+  this.#workouts = data;
+  this.#workouts.forEach(work => {
+
+    this._renderWorkout(work); 
+    this._renderWorkout(work); 
+
+  })
+
+  }
+
+  // Delete all the workouts from the local storage 
+  reset(){
+
+    localStorage.removeItem('workouts')
+    // After removing the item from the local storage we need to reload the page
+    // location is a big object containing lots of methods  
+    location.reload();
+
+  }
 
 }
 
 const app = new App();
 
-app._getPosition();
+// app._getPosition();
