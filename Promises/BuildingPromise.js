@@ -77,5 +77,7 @@ wait(2).then(() => {
 // resolve attached to Promise constructor directly , resolve the promise instantly without waiting for anything unlike
 // the lotteryPromise promise we have created above.
 
+// In the below lines of code resolve and reject are static methods in the Promise constructor which executes
+// immideately unlike the above shared function which we have created above 
 Promise.resolve('abc').then(x=> console.log(x));
 Promise.reject('abc').catch(x=> console.error(x)); 

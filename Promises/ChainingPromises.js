@@ -30,6 +30,7 @@ const renderCountry = function (data, className = "") {
           .then(response => response.json())
           .then(data => {
             renderCountry(data[0]);
+            console.log(data);
 
             const neighbour = data[0].borders?.[0];
             if(!neighbour) return;
