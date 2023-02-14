@@ -79,7 +79,7 @@ console.log(dataGeo, 'got data after reverse geocoding' );
 // resolved value of promise will be stored in res variable 
  const res = await fetch(`https://restcountries.com/v2/name/${dataGeo.country}`);
 
-//  console.log(res); 
+//  console.log(res) ...res also has the "ok" propertry which we can check in if statment; 
 if(!res.ok) throw new Error('Problem getting country!!')
 
 const data = await res.json();
