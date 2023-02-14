@@ -15,6 +15,8 @@
 // ***VVVVVVIMP : Error handling is majorly required when u deal with asyncronus code********************
 
 const countriesContainer = document.querySelector(".countries");
+const btn = document.querySelector('.btn-country');
+
 
 const renderCountry = function (data, className = "") {
     const html = `
@@ -92,7 +94,9 @@ renderCountry(data[1]);
 
 }   
 
-whereAmI();
+btn.addEventListener('click', 
+whereAmI)
+
 console.log('First!!')
 
 
