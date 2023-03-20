@@ -69,35 +69,71 @@ const wait = function(seconds){
 
 let currentImg; 
 
-createImage(imgPath).then(image => {
-    currentImg = image; 
-    console.log('Image 1 loaded')
-    return wait(2);
+// createImage(imgPath).then(image => {
+//     currentImg = image; 
+//     console.log('Image 1 loaded')
+//     return wait(2);
 
-} ).then(() => {
+// } ).then(() => {
 
-    currentImg.style.display = 'none';
-   return createImage(imgPath1);
-    }
-).then(img => {
-    currentImg = img; 
-    console.log('Image 2 loaded')
-    return wait(2);
-     }).then(()=>{
+//     currentImg.style.display = 'none';
+//    return createImage(imgPath1);
+//     }
+// ).then(img => {
+//     currentImg = img; 
+//     console.log('Image 2 loaded')
+//     return wait(2);
+//      }).then(()=>{
 
-        currentImg.style.display = 'none';
-     }). catch(err => console.error(err)) 
+//         currentImg.style.display = 'none';
+//      }). catch(err => console.error(err)) 
 
+//  Part 1 :  First need to create a loadPause function
 
-     const loadPause = async function(imgPath){
+const loadPause = async function(){
 
-      try {
+                  try {
+                    //   load Img 1 
+                    let img =  await createImage('https://rb.gy/vjsfzh');
+                    console.log('Image 1 loaded');
+                    await wait(2);
+                    img.style.display ='none'; 
 
-        await createImage()
+                    img =  await createImage('/EventLoop/EventLoopImages/ScreenShot Tool -20230202061719.png');
+                    console.log('Image 2 loaded');
+                    await wait(2);
+                    img.style.display ='none' 
         
-      } catch (err) {
-        
-      }
+                    } catch (err) {
 
-     }
+                        console.error(err); 
+        
+                   }
+
+                }
      
+// loadPause();                
+
+// Part 2 solution 
+
+const loadAll = async function(imgArr){
+
+try {
+    // createImage function returns a promise that's why we should await the promise 
+    // otherwise nothing is going to happen 
+    const imgs = imgArr.map(async img => await createImage(img))
+    // console.log(imgs);
+    const imgsEl = await Promise.all(imgs);
+    console.log(imgsEl); 
+    
+    // imgsEl.forEach(img => img.classList.add('parallel'));
+    
+} catch (error) {
+
+    console.error(error); 
+    
+}
+
+}
+
+loadAll(['https://rb.gy/vjsfzh', '/EventLoop/EventLoopImages/ScreenShot Tool -20230202061719.png']);

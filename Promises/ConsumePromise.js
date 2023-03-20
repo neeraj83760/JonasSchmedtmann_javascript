@@ -68,4 +68,5 @@ fetch(`https://restcountries.com/v2/name/${country}`)
 getCountryData('portugal');
 
 
-//  Wrap up :   Promises get rid of callback hell but didn't get rid of callbacks  
+//  Wrap up :   Promises get rid of callback hell but didn't get rid of callbacks
+
