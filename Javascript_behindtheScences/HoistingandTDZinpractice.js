@@ -21,7 +21,6 @@ function addDec(a,b){
  
 }
 
-
 // this below function expression is kind of const variable too that is why we get an error
 // if we try to access it before declaration 
 

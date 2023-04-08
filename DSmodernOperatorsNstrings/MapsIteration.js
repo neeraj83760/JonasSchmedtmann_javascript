@@ -1,5 +1,3 @@
-// Looping Objects: Object Keys, values,Entries properties of an Object transform the values in an Array  
-
 const weekdays = ['mon','tue','wed','thru','fri','sat','sun']
 
 openingHours = {
@@ -54,38 +52,56 @@ const restaurant = {
     
   };
 
-  // Property NAMES 
-  const properties = Object.keys(openingHours);
 
-  console.log(properties);
+// New way of setting values in a MAP
 
-  let OpenStr = `We are open on ${properties.length} days`;
+const question = new Map([
 
-  for(const day of Object.keys(openingHours)){
+    ['question','What is the best programming language in the World?'],
+    [1, 'C'],
+    [2,  'Java'],
+    [3, 'Javascript'],
+    ['correct', 3],
+    [true, 'correct'],
+    [false, 'Try Again']
 
-    // console.log(day);
-    OpenStr += `${day},`
-  }
+])
 
-  console.log(OpenStr);
+console.log(question);
 
-//   Property VALUES 
+// Convert Object to Maps 
 
-const values = Object.values(openingHours);
+console.log(Object.entries(openingHours));
 
-console.log(values);
+// When u already have a Object and u need a Map the below line of code will help u in this conversion  
+const hoursMap = new Map(Object.entries(openingHours));
 
+console.log(hoursMap);
 
-// Entire Object
+// Iteration on Maps : Maps are Iterable 
+// Key point : Objects are not iterable so make them Iterable we use Object.entries() method 
 
-const entries = Object.entries(openingHours);
+// QUIZ APP 
+console.log(question.get('question'))
+for(const [key, value] of  question){
 
-console.log(entries);
+    if(typeof key === 'number')
 
-// x will give each key and each value 
-// we are suppose to destructure like [key, value] but value itself in entries is an object so we
-// need to destructure the object futher and the end result is [key, {open,close}]sss 
-for(const [key, {open,close}] of entries){
+    console.log(`Answer ${key}: ${value}`)
 
-    console.log(`On ${key} we open at ${open} and close at ${close}`);
 }
+
+const Answer = Number ( prompt('Your Answer'))
+
+console.log(Answer);
+
+console.log(question.get(question.get('correct') === Answer))
+
+//  Convert Map to an Array 
+
+console.log([...question])
+
+// console.log([...question.keys()])
+
+// console.log([...question.values()])
+
