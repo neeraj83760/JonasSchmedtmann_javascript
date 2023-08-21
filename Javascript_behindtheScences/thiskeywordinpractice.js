@@ -9,7 +9,9 @@ ke saath create ho jaata hai
 hum usse change na kare to , Ye depend karta hai function actually kaise call hua hai aur uski value
 tabhi assign hoti hai jab function actually call ho for more details check the attached screeshot
 
-4. this never points to a function itself and not it's variable enviournment 
+4. this never points to a function itself and not it's variable enviournment
+
+5. Arrow function ka apna this keyword nahi hota to wo apne parent ke global(lexical) scope se value uthate hai 
 
 */ 
 
