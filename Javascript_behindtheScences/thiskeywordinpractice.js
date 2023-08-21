@@ -1,3 +1,19 @@
+/* this keyword mistery : below sequence me yaad rakhoge to kabhi nahi bhuloge
+
+1. pehli baat : this ek variable hai , refrence variable jo har execution context(every function) 
+ke saath create ho jaata hai 
+
+2. Ye this variable apne owner ko point karta hai jisme hum is keyword ko use kar sakte hai
+
+3. this static variable nahi hota for example , like let x = 5  to poore program me x = 5 hi rahega jabtak 
+hum usse change na kare to , Ye depend karta hai function actually kaise call hua hai aur uski value
+tabhi assign hoti hai jab function actually call ho for more details check the attached screeshot
+
+4. this never points to a function itself and not it's variable enviournment 
+
+*/ 
+
+
 // "use strict"
 
 // console.log(this)
